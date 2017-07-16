@@ -9430,14 +9430,19 @@ var ShopButton = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ShopButton.__proto__ || Object.getPrototypeOf(ShopButton)).call(this, props));
 
         _this.onClickHandler = function () {
+            _this.getCost();
+
             if (typeof _this.props.eventOnClick === 'function') {
                 _this.props.eventOnClick(_this.state.cost, _this.props.name);
             }
 
-            //         this.setState({
-            //     cost: (this.props.cost + (this.props.modifier * (this.props.quantity + 1)))
-            // });
-            // console.log(this.state.cost);
+            _this.getCost();
+        };
+
+        _this.getCost = function () {
+            _this.setState({
+                cost: _this.props.cost + _this.props.modifier * _this.props.quantity
+            });
         };
 
         _this.state = {
@@ -9449,6 +9454,8 @@ var ShopButton = function (_React$Component) {
     _createClass(ShopButton, [{
         key: 'render',
         value: function render() {
+            console.log(this.props.quantity + ' ' + this.props.name);
+
             return _react2.default.createElement(
                 'div',
                 { className: 'shopButton', onClick: this.onClickHandler },
@@ -9500,6 +9507,8 @@ var RightSideBar = function (_React$Component2) {
     _createClass(RightSideBar, [{
         key: 'render',
         value: function render() {
+            console.log(this.props.quantityCursors + ' right');
+
             return _react2.default.createElement(
                 'div',
                 { className: 'rightSideBar' },
@@ -9608,15 +9617,17 @@ var App = function (_React$Component5) {
                 switch (name) {
                     case 'Cursors':
                         _this5.setState({
-                            quantityCursors: _this5.state.quantityCursors + 1
+                            quantityCursors: _this5.state.quantityCursors + 1,
+                            currentQuantityKitties: _this5.state.currentQuantityKitties - cost
                         });
-                        console.log(_this5.state.quantityCursors);
+                        console.log(_this5.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
                         break;
                     case 'CrazyCatLady':
                         _this5.setState({
-                            quantityCrazyCatLady: _this5.state.quantityCrazyCatLady + 1
+                            quantityCrazyCatLady: _this5.state.quantityCrazyCatLady + 1,
+                            currentQuantityKitties: _this5.state.currentQuantityKitties - cost
                         });
-                        console.log(_this5.state.quantityCrazyCatLady);
+                        console.log(_this5.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                         break;
                     default:
                         console.log('Błąd');
@@ -9637,6 +9648,8 @@ var App = function (_React$Component5) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            console.log(this.state.quantityCursors + ' render');
+
             return _react2.default.createElement(
                 'div',
                 { className: 'mainFlex' },

@@ -9,22 +9,29 @@ class ShopButton extends React.Component {
         super(props) 
 
         this.state = {
-            cost: (this.props.cost + (this.props.modifier * this.props.quantity ))
+            cost: this.props.cost + (this.props.modifier * this.props.quantity )
         }
     }
 
     onClickHandler = () => {
+        this.getCost();
+        
         if (typeof this.props.eventOnClick === 'function') {
             this.props.eventOnClick(this.state.cost, this.props.name);
         }
 
-            //         this.setState({
-            //     cost: (this.props.cost + (this.props.modifier * (this.props.quantity + 1)))
-            // });
-            // console.log(this.state.cost);
+        this.getCost();
     }
 
-    render() {
+    getCost = () => {
+        this.setState({
+            cost: this.props.cost + (this.props.modifier * this.props.quantity )
+        });
+    }
+
+    render() {      
+        console.log(this.props.quantity + ' ' + this.props.name);
+
         return <div className = "shopButton" onClick = {this.onClickHandler}>
                 <p> {this.props.quantity} </p>
                 <p> {this.props.name} </p>
@@ -41,11 +48,13 @@ class RightSideBar extends React.Component {
             cursorBasicCost: 10,
             cursorModifier: 5,
             CrazyCatLadyBasicCost: 100,
-            CrazyCatLadyModifier: 15
+            CrazyCatLadyModifier: 15            
         }
     }
 
     render() {
+        console.log(this.props.quantityCursors + ' right');
+
         return <div className = 'rightSideBar'>
             <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost} 
                                          modifier = {this.state.cursorModifier} 
@@ -107,13 +116,15 @@ class App extends React.Component {
             switch(name) {
                 case 'Cursors':
                         this.setState({
-                            quantityCursors: (this.state.quantityCursors + 1)
+                            quantityCursors: (this.state.quantityCursors + 1),
+                            currentQuantityKitties: (this.state.currentQuantityKitties - cost)
                         })
-                        console.log(this.state.quantityCursors); // po pierwszym kliknięciu jest dalej 0
+                        console.log(this.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
                     break;
                 case 'CrazyCatLady':
                          this.setState({
-                            quantityCrazyCatLady: (this.state.quantityCrazyCatLady + 1)
+                            quantityCrazyCatLady: (this.state.quantityCrazyCatLady + 1),
+                            currentQuantityKitties: (this.state.currentQuantityKitties - cost)
                         })
                         console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                     break;
@@ -125,6 +136,8 @@ class App extends React.Component {
     }
 
     render() {
+        console.log(this.state.quantityCursors + ' render');
+
         return <div className = 'mainFlex'>
                 <Main kittyPerSecond = {this.state.kittyPerSecond} 
                             currentQuantityKitties = {this.state.currentQuantityKitties} 
