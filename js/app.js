@@ -9781,17 +9781,25 @@ var ShopButton = function (_React$Component) {
 
         _this.onClickHandler = function () {
             _this.getCost();
+            console.log(_this.props.cost, _this.props.modifier, _this.props.quantity, _this.state.cost);
 
             if (typeof _this.props.eventOnClick === 'function') {
                 _this.props.eventOnClick(_this.state.cost, _this.props.name);
             }
 
-            _this.getCost();
+            // this.getCost();
+            // console.log(this.state.cost);
         };
 
         _this.getCost = function () {
+            var newCost = void 0;
+            if (_this.props.quantity === 0) {
+                newCost = _this.props.cost + _this.props.modifier;
+            } else {
+                newCost = _this.state.cost + _this.props.modifier * _this.props.quantity;
+            }
             _this.setState({
-                cost: _this.props.cost + _this.props.modifier * _this.props.quantity
+                cost: newCost
             });
         };
 
@@ -9877,7 +9885,7 @@ var RightSideBar = function (_React$Component2) {
     return RightSideBar;
 }(_react2.default.Component);
 
-//Main 
+//Main
 
 
 var KittyButton = function (_React$Component3) {
