@@ -103,7 +103,7 @@ class App extends React.Component {
             quantityCursors: 0,
             cursorsBasicProduction: 0.1,
             quantityCrazyCatLady: 0,
-            crazyCatLadyBasicProduction: 0.1
+            crazyCatLadyBasicProduction: 0.5
         }
     }
 
@@ -132,8 +132,12 @@ class App extends React.Component {
                     break;
                 default:
                     console.log('Błąd');
-            }               
+            }  
         }
+
+        this.setState({
+                kittyPerSecond: this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction
+        });
     }
 
     render() {
