@@ -40,6 +40,11 @@ body {
             border: solid 2px black;
             margin: 0;
             align-self: flex-end;
+
+            p {
+                display: inline-flex;
+                margin: 10px;
+            }
         }
     } 
 }

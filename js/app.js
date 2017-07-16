@@ -9424,10 +9424,26 @@ __webpack_require__(178);
 var ShopButton = function (_React$Component) {
     _inherits(ShopButton, _React$Component);
 
-    function ShopButton() {
+    function ShopButton(props) {
         _classCallCheck(this, ShopButton);
 
-        return _possibleConstructorReturn(this, (ShopButton.__proto__ || Object.getPrototypeOf(ShopButton)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (ShopButton.__proto__ || Object.getPrototypeOf(ShopButton)).call(this, props));
+
+        _this.onClickHandler = function () {
+            if (typeof _this.props.eventOnClick === 'function') {
+                _this.props.eventOnClick(_this.state.cost, _this.props.name);
+            }
+
+            //         this.setState({
+            //     cost: (this.props.cost + (this.props.modifier * (this.props.quantity + 1)))
+            // });
+            // console.log(this.state.cost);
+        };
+
+        _this.state = {
+            cost: _this.props.cost + _this.props.modifier * _this.props.quantity
+        };
+        return _this;
     }
 
     _createClass(ShopButton, [{
@@ -9435,8 +9451,28 @@ var ShopButton = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'shopButton' },
-                this.props.name
+                { className: 'shopButton', onClick: this.onClickHandler },
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    this.props.quantity,
+                    ' '
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    this.props.name,
+                    ' '
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    this.state.cost,
+                    ' '
+                )
             );
         }
     }]);
@@ -9447,10 +9483,18 @@ var ShopButton = function (_React$Component) {
 var RightSideBar = function (_React$Component2) {
     _inherits(RightSideBar, _React$Component2);
 
-    function RightSideBar() {
+    function RightSideBar(props) {
         _classCallCheck(this, RightSideBar);
 
-        return _possibleConstructorReturn(this, (RightSideBar.__proto__ || Object.getPrototypeOf(RightSideBar)).apply(this, arguments));
+        var _this2 = _possibleConstructorReturn(this, (RightSideBar.__proto__ || Object.getPrototypeOf(RightSideBar)).call(this, props));
+
+        _this2.state = {
+            cursorBasicCost: 10,
+            cursorModifier: 5,
+            CrazyCatLadyBasicCost: 100,
+            CrazyCatLadyModifier: 15
+        };
+        return _this2;
     }
 
     _createClass(RightSideBar, [{
@@ -9459,8 +9503,14 @@ var RightSideBar = function (_React$Component2) {
             return _react2.default.createElement(
                 'div',
                 { className: 'rightSideBar' },
-                _react2.default.createElement(ShopButton, { name: 'cursors' }),
-                _react2.default.createElement(ShopButton, { name: 'CrazyCatLady' })
+                _react2.default.createElement(ShopButton, { name: 'Cursors', cost: this.state.cursorBasicCost,
+                    modifier: this.state.cursorModifier,
+                    quantity: this.props.quantityCursors,
+                    eventOnClick: this.props.eventOnClick }),
+                _react2.default.createElement(ShopButton, { name: 'CrazyCatLady', cost: this.state.CrazyCatLadyBasicCost,
+                    modifier: this.state.CrazyCatLadyModifier,
+                    quantity: this.props.quantityCrazyCatLady,
+                    eventOnClick: this.props.eventOnClick })
             );
         }
     }]);
@@ -9475,15 +9525,27 @@ var KittyButton = function (_React$Component3) {
     _inherits(KittyButton, _React$Component3);
 
     function KittyButton() {
+        var _ref;
+
+        var _temp, _this3, _ret;
+
         _classCallCheck(this, KittyButton);
 
-        return _possibleConstructorReturn(this, (KittyButton.__proto__ || Object.getPrototypeOf(KittyButton)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this3 = _possibleConstructorReturn(this, (_ref = KittyButton.__proto__ || Object.getPrototypeOf(KittyButton)).call.apply(_ref, [this].concat(args))), _this3), _this3.onClickHandler = function () {
+            if (typeof _this3.props.eventOnClick === 'function') {
+                _this3.props.eventOnClick();
+            }
+        }, _temp), _possibleConstructorReturn(_this3, _ret);
     }
 
     _createClass(KittyButton, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { className: 'kittyButton' });
+            return _react2.default.createElement('div', { className: 'kittyButton', onClick: this.onClickHandler });
         }
     }]);
 
@@ -9508,14 +9570,18 @@ var Main = function (_React$Component4) {
                 _react2.default.createElement(
                     'h2',
                     null,
-                    ' xyz kitties  '
+                    ' ',
+                    this.props.currentQuantityKitties,
+                    ' kitties  '
                 ),
                 _react2.default.createElement(
                     'h2',
                     null,
-                    ' per second: xyz '
+                    ' per second: ',
+                    this.props.kittyPerSecond,
+                    ' '
                 ),
-                _react2.default.createElement(KittyButton, null)
+                _react2.default.createElement(KittyButton, { eventOnClick: this.props.eventOnClick })
             );
         }
     }]);
@@ -9529,7 +9595,43 @@ var App = function (_React$Component5) {
     function App() {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this5 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+        _this5.addKitty = function () {
+            _this5.setState({
+                currentQuantityKitties: _this5.state.currentQuantityKitties + 1
+            });
+        };
+
+        _this5.buyItem = function (cost, name) {
+            if (_this5.state.currentQuantityKitties >= cost) {
+                switch (name) {
+                    case 'Cursors':
+                        _this5.setState({
+                            quantityCursors: _this5.state.quantityCursors + 1
+                        });
+                        console.log(_this5.state.quantityCursors);
+                        break;
+                    case 'CrazyCatLady':
+                        _this5.setState({
+                            quantityCrazyCatLady: _this5.state.quantityCrazyCatLady + 1
+                        });
+                        console.log(_this5.state.quantityCrazyCatLady);
+                        break;
+                    default:
+                        console.log('Błąd');
+                }
+            }
+        };
+
+        _this5.state = {
+            kittyPerSecond: 0,
+            currentQuantityKitties: 0,
+            globalQuantityKitties: 0,
+            quantityCursors: 0,
+            quantityCrazyCatLady: 0
+        };
+        return _this5;
     }
 
     _createClass(App, [{
@@ -9538,8 +9640,12 @@ var App = function (_React$Component5) {
             return _react2.default.createElement(
                 'div',
                 { className: 'mainFlex' },
-                _react2.default.createElement(Main, null),
-                _react2.default.createElement(RightSideBar, null)
+                _react2.default.createElement(Main, { kittyPerSecond: this.state.kittyPerSecond,
+                    currentQuantityKitties: this.state.currentQuantityKitties,
+                    eventOnClick: this.addKitty }),
+                _react2.default.createElement(RightSideBar, { quantityCursors: this.state.quantityCursors,
+                    quantityCrazyCatLady: this.state.quantityCrazyCatLady,
+                    eventOnClick: this.buyItem })
             );
         }
     }]);
@@ -21848,7 +21954,7 @@ exports = module.exports = __webpack_require__(180)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background-color: red;\n  margin: 0; }\n\n#app {\n  height: 100%;\n  width: 100%;\n  margin: 0; }\n\n.mainFlex {\n  width: inherit;\n  height: inherit;\n  display: inline-flex;\n  justify-content: space-around; }\n  .mainFlex .main {\n    flex-grow: 10;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    .mainFlex .main .kittyButton {\n      width: 300px;\n      height: 275px;\n      background-image: url(" + __webpack_require__(181) + "); }\n  .mainFlex .rightSideBar {\n    flex-grow: 0.1;\n    display: flex;\n    flex-direction: column; }\n    .mainFlex .rightSideBar .shopButton {\n      background-color: #b6c2d6;\n      width: 300px;\n      height: 64px;\n      border: solid 2px black;\n      margin: 0;\n      align-self: flex-end; }\n", ""]);
+exports.push([module.i, "body {\n  background-color: red;\n  margin: 0; }\n\n#app {\n  height: 100%;\n  width: 100%;\n  margin: 0; }\n\n.mainFlex {\n  width: inherit;\n  height: inherit;\n  display: inline-flex;\n  justify-content: space-around; }\n  .mainFlex .main {\n    flex-grow: 10;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    .mainFlex .main .kittyButton {\n      width: 300px;\n      height: 275px;\n      background-image: url(" + __webpack_require__(181) + "); }\n  .mainFlex .rightSideBar {\n    flex-grow: 0.1;\n    display: flex;\n    flex-direction: column; }\n    .mainFlex .rightSideBar .shopButton {\n      background-color: #b6c2d6;\n      width: 300px;\n      height: 64px;\n      border: solid 2px black;\n      margin: 0;\n      align-self: flex-end; }\n      .mainFlex .rightSideBar .shopButton p {\n        display: inline-flex;\n        margin: 10px; }\n", ""]);
 
 // exports
 
