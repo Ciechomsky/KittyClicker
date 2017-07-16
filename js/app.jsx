@@ -109,17 +109,17 @@ class App extends React.Component {
                         this.setState({
                             quantityCursors: (this.state.quantityCursors + 1)
                         })
-                        console.log(this.state.quantityCursors);
+                        console.log(this.state.quantityCursors); // po pierwszym kliknięciu jest dalej 0
                     break;
                 case 'CrazyCatLady':
                          this.setState({
                             quantityCrazyCatLady: (this.state.quantityCrazyCatLady + 1)
                         })
-                        console.log(this.state.quantityCrazyCatLady);
+                        console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                     break;
                 default:
                     console.log('Błąd');
-            }               
+            }              
                 
         }
     }
