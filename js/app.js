@@ -9454,7 +9454,7 @@ var ShopButton = function (_React$Component) {
     _createClass(ShopButton, [{
         key: 'render',
         value: function render() {
-            console.log(this.props.quantity + ' ' + this.props.name);
+            // console.log(this.props.quantity + ' ' + this.props.name);
 
             return _react2.default.createElement(
                 'div',
@@ -9507,7 +9507,7 @@ var RightSideBar = function (_React$Component2) {
     _createClass(RightSideBar, [{
         key: 'render',
         value: function render() {
-            console.log(this.props.quantityCursors + ' right');
+            //console.log(this.props.quantityCursors + ' right');
 
             return _react2.default.createElement(
                 'div',
@@ -9620,14 +9620,14 @@ var App = function (_React$Component5) {
                             quantityCursors: _this5.state.quantityCursors + 1,
                             currentQuantityKitties: _this5.state.currentQuantityKitties - cost
                         });
-                        console.log(_this5.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
+                        //console.log(this.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
                         break;
                     case 'CrazyCatLady':
                         _this5.setState({
                             quantityCrazyCatLady: _this5.state.quantityCrazyCatLady + 1,
                             currentQuantityKitties: _this5.state.currentQuantityKitties - cost
                         });
-                        console.log(_this5.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
+                        //console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                         break;
                     default:
                         console.log('Błąd');
@@ -9640,7 +9640,9 @@ var App = function (_React$Component5) {
             currentQuantityKitties: 0,
             globalQuantityKitties: 0,
             quantityCursors: 0,
-            quantityCrazyCatLady: 0
+            cursorsBasicProduction: 0.1,
+            quantityCrazyCatLady: 0,
+            crazyCatLadyBasicProduction: 0.1
         };
         return _this5;
     }
@@ -9648,7 +9650,7 @@ var App = function (_React$Component5) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            console.log(this.state.quantityCursors + ' render');
+            //console.log(this.state.quantityCursors + ' render');
 
             return _react2.default.createElement(
                 'div',

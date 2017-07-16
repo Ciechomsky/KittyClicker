@@ -15,7 +15,7 @@ class ShopButton extends React.Component {
 
     onClickHandler = () => {
         this.getCost();
-        
+
         if (typeof this.props.eventOnClick === 'function') {
             this.props.eventOnClick(this.state.cost, this.props.name);
         }
@@ -30,7 +30,7 @@ class ShopButton extends React.Component {
     }
 
     render() {      
-        console.log(this.props.quantity + ' ' + this.props.name);
+       // console.log(this.props.quantity + ' ' + this.props.name);
 
         return <div className = "shopButton" onClick = {this.onClickHandler}>
                 <p> {this.props.quantity} </p>
@@ -53,7 +53,7 @@ class RightSideBar extends React.Component {
     }
 
     render() {
-        console.log(this.props.quantityCursors + ' right');
+        //console.log(this.props.quantityCursors + ' right');
 
         return <div className = 'rightSideBar'>
             <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost} 
@@ -101,7 +101,9 @@ class App extends React.Component {
             currentQuantityKitties: 0,
             globalQuantityKitties: 0,
             quantityCursors: 0,
-            quantityCrazyCatLady: 0
+            cursorsBasicProduction: 0.1,
+            quantityCrazyCatLady: 0,
+            crazyCatLadyBasicProduction: 0.1
         }
     }
 
@@ -119,24 +121,23 @@ class App extends React.Component {
                             quantityCursors: (this.state.quantityCursors + 1),
                             currentQuantityKitties: (this.state.currentQuantityKitties - cost)
                         })
-                        console.log(this.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
+                        //console.log(this.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
                     break;
                 case 'CrazyCatLady':
                          this.setState({
                             quantityCrazyCatLady: (this.state.quantityCrazyCatLady + 1),
                             currentQuantityKitties: (this.state.currentQuantityKitties - cost)
                         })
-                        console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
+                        //console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                     break;
                 default:
                     console.log('Błąd');
-            }              
-                
+            }               
         }
     }
 
     render() {
-        console.log(this.state.quantityCursors + ' render');
+        //console.log(this.state.quantityCursors + ' render');
 
         return <div className = 'mainFlex'>
                 <Main kittyPerSecond = {this.state.kittyPerSecond} 
