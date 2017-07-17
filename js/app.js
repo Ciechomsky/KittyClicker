@@ -10020,7 +10020,11 @@ var App = function (_React$Component6) {
                 'div',
                 { className: 'mainFlex' },
                 _react2.default.createElement(Main, { kittyPerSecond: kittyPerSecond,
+<<<<<<< HEAD
                     currentQuantityKitties: this.state.currentQuantityKitties.toFixed(2),
+=======
+                    currentQuantityKitties: Math.round(this.state.currentQuantityKitties * 100) / 100,
+>>>>>>> c78e9c2d82b7e604013112f2fd99d16c9ba4307b
                     eventOnClick: this.addKitty }),
                 _react2.default.createElement(RightSideBar, { quantityCursors: this.state.quantityCursors,
                     quantityCrazyCatLady: this.state.quantityCrazyCatLady,

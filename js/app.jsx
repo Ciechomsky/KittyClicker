@@ -127,7 +127,7 @@ class App extends React.Component {
         this.intervalId = setInterval(() => {
             this.setState({
                 currentQuantityKitties: this.state.currentQuantityKitties + 
-                            (this.state.quantityCursors * this.state.cursorsBasicProduction + 
+                             (this.state.quantityCursors * this.state.cursorsBasicProduction + 
                                 this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction)
             });
         }, 1000);
