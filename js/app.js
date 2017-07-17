@@ -10014,13 +10014,17 @@ var App = function (_React$Component6) {
     }, {
         key: 'render',
         value: function render() {
-            var kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction;
+            var kittyPerSecond = (this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction).toFixed(2);
 
             return _react2.default.createElement(
                 'div',
                 { className: 'mainFlex' },
                 _react2.default.createElement(Main, { kittyPerSecond: kittyPerSecond,
+<<<<<<< HEAD
+                    currentQuantityKitties: this.state.currentQuantityKitties.toFixed(2),
+=======
                     currentQuantityKitties: Math.round(this.state.currentQuantityKitties * 100) / 100,
+>>>>>>> c78e9c2d82b7e604013112f2fd99d16c9ba4307b
                     eventOnClick: this.addKitty }),
                 _react2.default.createElement(RightSideBar, { quantityCursors: this.state.quantityCursors,
                     quantityCrazyCatLady: this.state.quantityCrazyCatLady,

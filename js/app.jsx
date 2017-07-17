@@ -134,12 +134,11 @@ class App extends React.Component {
 }
 
     render() {
-        let kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction 
-                            + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction         
+        let kittyPerSecond = (this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction).toFixed(2)
 
         return <div className = 'mainFlex'>
-                <Main kittyPerSecond = {kittyPerSecond}
-                            currentQuantityKitties = {Math.round(this.state.currentQuantityKitties* 100) / 100} 
+                <Main kittyPerSecond = {kittyPerSecond} 
+                            currentQuantityKitties = {this.state.currentQuantityKitties.toFixed(2)}
                             eventOnClick = {this.addKitty} />
                 <RightSideBar quantityCursors = {this.state.quantityCursors} 
                               quantityCrazyCatLady = {this.state.quantityCrazyCatLady} 
