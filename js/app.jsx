@@ -127,18 +127,19 @@ class App extends React.Component {
         this.intervalId = setInterval(() => {
             this.setState({
                 currentQuantityKitties: this.state.currentQuantityKitties + 
-                            (this.state.quantityCursors * this.state.cursorsBasicProduction + 
+                             (this.state.quantityCursors * this.state.cursorsBasicProduction + 
                                 this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction)
             });
         }, 1000);
 }
 
     render() {
-        let kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction
+        let kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction 
+                            + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction         
 
         return <div className = 'mainFlex'>
-                <Main kittyPerSecond = {kittyPerSecond} 
-                            currentQuantityKitties = {this.state.currentQuantityKitties} 
+                <Main kittyPerSecond = {kittyPerSecond}
+                            currentQuantityKitties = {Math.round(this.state.currentQuantityKitties* 100) / 100} 
                             eventOnClick = {this.addKitty} />
                 <RightSideBar quantityCursors = {this.state.quantityCursors} 
                               quantityCrazyCatLady = {this.state.quantityCrazyCatLady} 
