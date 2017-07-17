@@ -16,8 +16,6 @@ class ShopButton extends React.Component {
     }
 
     render() {      
-       // console.log(this.props.quantity + ' ' + this.props.name);
-
         return <div className = "shopButton" onClick = {this.onClickHandler}>
                 <p> {this.props.quantity} </p>
                 <p> {this.props.name} </p>
@@ -66,10 +64,16 @@ class KittyButton extends React.Component {
     }
 }
 
+class CounterOfKitties extends React.Component {
+    render() {
+        return <h2> {this.props.currentQuantityKitties} kitties  </h2>
+    }
+}
+
 class Main extends React.Component {
     render() {
         return <div className = 'main'>
-                <h2> {this.props.currentQuantityKitties} kitties  </h2>
+                <CounterOfKitties currentQuantityKitties = {this.props.currentQuantityKitties} kitties />
                 <h2> per second: {this.props.kittyPerSecond} </h2>
                 <KittyButton eventOnClick = {this.props.eventOnClick} />
                </div>
@@ -118,6 +122,16 @@ class App extends React.Component {
             }  
         }
     }
+
+    componentDidMount(){
+        this.intervalId = setInterval(() => {
+            this.setState({
+                currentQuantityKitties: this.state.currentQuantityKitties + 
+                            (this.state.quantityCursors * this.state.cursorsBasicProduction + 
+                                this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction)
+            });
+        }, 1000);
+}
 
     render() {
         let kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction

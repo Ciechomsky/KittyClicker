@@ -9791,8 +9791,6 @@ var ShopButton = function (_React$Component) {
     _createClass(ShopButton, [{
         key: 'render',
         value: function render() {
-            // console.log(this.props.quantity + ' ' + this.props.name);
-
             return _react2.default.createElement(
                 'div',
                 { className: 'shopButton', onClick: this.onClickHandler },
@@ -9896,8 +9894,33 @@ var KittyButton = function (_React$Component3) {
     return KittyButton;
 }(_react2.default.Component);
 
-var Main = function (_React$Component4) {
-    _inherits(Main, _React$Component4);
+var CounterOfKitties = function (_React$Component4) {
+    _inherits(CounterOfKitties, _React$Component4);
+
+    function CounterOfKitties() {
+        _classCallCheck(this, CounterOfKitties);
+
+        return _possibleConstructorReturn(this, (CounterOfKitties.__proto__ || Object.getPrototypeOf(CounterOfKitties)).apply(this, arguments));
+    }
+
+    _createClass(CounterOfKitties, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'h2',
+                null,
+                ' ',
+                this.props.currentQuantityKitties,
+                ' kitties  '
+            );
+        }
+    }]);
+
+    return CounterOfKitties;
+}(_react2.default.Component);
+
+var Main = function (_React$Component5) {
+    _inherits(Main, _React$Component5);
 
     function Main() {
         _classCallCheck(this, Main);
@@ -9911,13 +9934,7 @@ var Main = function (_React$Component4) {
             return _react2.default.createElement(
                 'div',
                 { className: 'main' },
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    ' ',
-                    this.props.currentQuantityKitties,
-                    ' kitties  '
-                ),
+                _react2.default.createElement(CounterOfKitties, { currentQuantityKitties: this.props.currentQuantityKitties, kitties: true }),
                 _react2.default.createElement(
                     'h2',
                     null,
@@ -9936,33 +9953,33 @@ var Main = function (_React$Component4) {
 //App
 
 
-var App = function (_React$Component5) {
-    _inherits(App, _React$Component5);
+var App = function (_React$Component6) {
+    _inherits(App, _React$Component6);
 
     function App() {
         _classCallCheck(this, App);
 
-        var _this5 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+        var _this6 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-        _this5.addKitty = function () {
-            _this5.setState({
-                currentQuantityKitties: _this5.state.currentQuantityKitties + 1
+        _this6.addKitty = function () {
+            _this6.setState({
+                currentQuantityKitties: _this6.state.currentQuantityKitties + 1
             });
         };
 
-        _this5.buyItem = function (cost, name) {
-            if (_this5.state.currentQuantityKitties >= cost) {
+        _this6.buyItem = function (cost, name) {
+            if (_this6.state.currentQuantityKitties >= cost) {
                 switch (name) {
                     case 'Cursors':
-                        _this5.setState({
-                            quantityCursors: _this5.state.quantityCursors + 1,
-                            currentQuantityKitties: _this5.state.currentQuantityKitties - cost
+                        _this6.setState({
+                            quantityCursors: _this6.state.quantityCursors + 1,
+                            currentQuantityKitties: _this6.state.currentQuantityKitties - cost
                         });
                         break;
                     case 'CrazyCatLady':
-                        _this5.setState({
-                            quantityCrazyCatLady: _this5.state.quantityCrazyCatLady + 1,
-                            currentQuantityKitties: _this5.state.currentQuantityKitties - cost
+                        _this6.setState({
+                            quantityCrazyCatLady: _this6.state.quantityCrazyCatLady + 1,
+                            currentQuantityKitties: _this6.state.currentQuantityKitties - cost
                         });
                         break;
                     default:
@@ -9971,7 +9988,7 @@ var App = function (_React$Component5) {
             }
         };
 
-        _this5.state = {
+        _this6.state = {
             kittyPerSecond: 0,
             currentQuantityKitties: 0,
             globalQuantityKitties: 0,
@@ -9980,10 +9997,21 @@ var App = function (_React$Component5) {
             quantityCrazyCatLady: 0,
             crazyCatLadyBasicProduction: 0.5
         };
-        return _this5;
+        return _this6;
     }
 
     _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this7 = this;
+
+            this.intervalId = setInterval(function () {
+                _this7.setState({
+                    currentQuantityKitties: _this7.state.currentQuantityKitties + (_this7.state.quantityCursors * _this7.state.cursorsBasicProduction + _this7.state.quantityCrazyCatLady * _this7.state.crazyCatLadyBasicProduction)
+                });
+            }, 1000);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction;
