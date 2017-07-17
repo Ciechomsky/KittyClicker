@@ -7,26 +7,12 @@ require('../scss/main.scss')
 class ShopButton extends React.Component {
     constructor(props) {
         super(props) 
-
-        this.state = {
-            cost: this.props.cost + (this.props.modifier * this.props.quantity )
-        }
     }
 
     onClickHandler = () => {
-        this.getCost();
-
         if (typeof this.props.eventOnClick === 'function') {
-            this.props.eventOnClick(this.state.cost, this.props.name);
+            this.props.eventOnClick(this.props.cost, this.props.name);
         }
-
-        this.getCost();
-    }
-
-    getCost = () => {
-        this.setState({
-            cost: this.props.cost + (this.props.modifier * this.props.quantity )
-        });
     }
 
     render() {      
@@ -35,7 +21,7 @@ class ShopButton extends React.Component {
         return <div className = "shopButton" onClick = {this.onClickHandler}>
                 <p> {this.props.quantity} </p>
                 <p> {this.props.name} </p>
-                <p> {this.state.cost} </p>
+                <p> {this.props.cost} </p>
             </div>
     }
 }
@@ -56,12 +42,10 @@ class RightSideBar extends React.Component {
         //console.log(this.props.quantityCursors + ' right');
 
         return <div className = 'rightSideBar'>
-            <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost} 
-                                         modifier = {this.state.cursorModifier} 
+            <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost + this.state.cursorModifier * this.props.quantityCursors} 
                                          quantity = {this.props.quantityCursors}
                                          eventOnClick = {this.props.eventOnClick} />
-            <ShopButton name = 'CrazyCatLady' cost = {this.state.CrazyCatLadyBasicCost} 
-                                              modifier = {this.state.CrazyCatLadyModifier} 
+            <ShopButton name = 'CrazyCatLady' cost = {this.state.CrazyCatLadyBasicCost + this.state.CrazyCatLadyModifier * this.props.quantityCrazyCatLady} 
                                               quantity = {this.props.quantityCrazyCatLady}
                                               eventOnClick = {this.props.eventOnClick} />
             </div>
@@ -92,6 +76,7 @@ class Main extends React.Component {
     }
 }
 
+//App
 class App extends React.Component {
     constructor(){
         super()
@@ -121,30 +106,24 @@ class App extends React.Component {
                             quantityCursors: (this.state.quantityCursors + 1),
                             currentQuantityKitties: (this.state.currentQuantityKitties - cost)
                         })
-                        //console.log(this.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
                     break;
                 case 'CrazyCatLady':
                          this.setState({
                             quantityCrazyCatLady: (this.state.quantityCrazyCatLady + 1),
                             currentQuantityKitties: (this.state.currentQuantityKitties - cost)
                         })
-                        //console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                     break;
                 default:
                     console.log('Błąd');
             }  
         }
-
-        this.setState({
-                kittyPerSecond: this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction
-        });
     }
 
     render() {
-        //console.log(this.state.quantityCursors + ' render');
+        let kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction
 
         return <div className = 'mainFlex'>
-                <Main kittyPerSecond = {this.state.kittyPerSecond} 
+                <Main kittyPerSecond = {kittyPerSecond} 
                             currentQuantityKitties = {this.state.currentQuantityKitties} 
                             eventOnClick = {this.addKitty} />
                 <RightSideBar quantityCursors = {this.state.quantityCursors} 

@@ -9780,24 +9780,11 @@ var ShopButton = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (ShopButton.__proto__ || Object.getPrototypeOf(ShopButton)).call(this, props));
 
         _this.onClickHandler = function () {
-            _this.getCost();
-
             if (typeof _this.props.eventOnClick === 'function') {
-                _this.props.eventOnClick(_this.state.cost, _this.props.name);
+                _this.props.eventOnClick(_this.props.cost, _this.props.name);
             }
-
-            _this.getCost();
         };
 
-        _this.getCost = function () {
-            _this.setState({
-                cost: _this.props.cost + _this.props.modifier * _this.props.quantity
-            });
-        };
-
-        _this.state = {
-            cost: _this.props.cost + _this.props.modifier * _this.props.quantity
-        };
         return _this;
     }
 
@@ -9827,7 +9814,7 @@ var ShopButton = function (_React$Component) {
                     'p',
                     null,
                     ' ',
-                    this.state.cost,
+                    this.props.cost,
                     ' '
                 )
             );
@@ -9862,12 +9849,10 @@ var RightSideBar = function (_React$Component2) {
             return _react2.default.createElement(
                 'div',
                 { className: 'rightSideBar' },
-                _react2.default.createElement(ShopButton, { name: 'Cursors', cost: this.state.cursorBasicCost,
-                    modifier: this.state.cursorModifier,
+                _react2.default.createElement(ShopButton, { name: 'Cursors', cost: this.state.cursorBasicCost + this.state.cursorModifier * this.props.quantityCursors,
                     quantity: this.props.quantityCursors,
                     eventOnClick: this.props.eventOnClick }),
-                _react2.default.createElement(ShopButton, { name: 'CrazyCatLady', cost: this.state.CrazyCatLadyBasicCost,
-                    modifier: this.state.CrazyCatLadyModifier,
+                _react2.default.createElement(ShopButton, { name: 'CrazyCatLady', cost: this.state.CrazyCatLadyBasicCost + this.state.CrazyCatLadyModifier * this.props.quantityCrazyCatLady,
                     quantity: this.props.quantityCrazyCatLady,
                     eventOnClick: this.props.eventOnClick })
             );
@@ -9948,6 +9933,9 @@ var Main = function (_React$Component4) {
     return Main;
 }(_react2.default.Component);
 
+//App
+
+
 var App = function (_React$Component5) {
     _inherits(App, _React$Component5);
 
@@ -9970,23 +9958,17 @@ var App = function (_React$Component5) {
                             quantityCursors: _this5.state.quantityCursors + 1,
                             currentQuantityKitties: _this5.state.currentQuantityKitties - cost
                         });
-                        //console.log(this.state.quantityCursors + ' fukncja'); // po pierwszym kliknięciu jest dalej 0
                         break;
                     case 'CrazyCatLady':
                         _this5.setState({
                             quantityCrazyCatLady: _this5.state.quantityCrazyCatLady + 1,
                             currentQuantityKitties: _this5.state.currentQuantityKitties - cost
                         });
-                        //console.log(this.state.quantityCrazyCatLady); // po pierwszym kliknięciu jest dalej 0
                         break;
                     default:
                         console.log('Błąd');
                 }
             }
-
-            _this5.setState({
-                kittyPerSecond: _this5.state.quantityCursors * _this5.state.cursorsBasicProduction + _this5.state.quantityCrazyCatLady * _this5.state.crazyCatLadyBasicProduction
-            });
         };
 
         _this5.state = {
@@ -10004,12 +9986,12 @@ var App = function (_React$Component5) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            //console.log(this.state.quantityCursors + ' render');
+            var kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction;
 
             return _react2.default.createElement(
                 'div',
                 { className: 'mainFlex' },
-                _react2.default.createElement(Main, { kittyPerSecond: this.state.kittyPerSecond,
+                _react2.default.createElement(Main, { kittyPerSecond: kittyPerSecond,
                     currentQuantityKitties: this.state.currentQuantityKitties,
                     eventOnClick: this.addKitty }),
                 _react2.default.createElement(RightSideBar, { quantityCursors: this.state.quantityCursors,
