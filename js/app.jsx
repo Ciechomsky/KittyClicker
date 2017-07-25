@@ -12,7 +12,7 @@ class ShopButton extends React.Component {
     onClickHandler = () => {
         if (typeof this.props.eventOnClick === 'function') {
             this.props.eventOnClick(this.props.cost, this.props.name);
-        }
+        }        
     }
 
     render() {      
@@ -37,8 +37,6 @@ class RightSideBar extends React.Component {
     }
 
     render() {
-        //console.log(this.props.quantityCursors + ' right');
-
         return <div className = 'rightSideBar'>
             <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost + this.state.cursorModifier * this.props.quantityCursors} 
                                          quantity = {this.props.quantityCursors}
@@ -136,8 +134,8 @@ class App extends React.Component {
 }
 
     render() {
-        let kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction 
-                            + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction         
+        let kittyPerSecond = Math.round(this.state.quantityCursors * this.state.cursorsBasicProduction * 100) / 100
+                            + Math.round( this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction * 100) / 100; 
 
         return <div className = 'mainFlex'>
                 <Main kittyPerSecond = {kittyPerSecond}

@@ -9848,8 +9848,6 @@ var RightSideBar = function (_React$Component2) {
     _createClass(RightSideBar, [{
         key: 'render',
         value: function render() {
-            //console.log(this.props.quantityCursors + ' right');
-
             return _react2.default.createElement(
                 'div',
                 { className: 'rightSideBar' },
@@ -10022,7 +10020,7 @@ var App = function (_React$Component6) {
     }, {
         key: 'render',
         value: function render() {
-            var kittyPerSecond = this.state.quantityCursors * this.state.cursorsBasicProduction + this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction;
+            var kittyPerSecond = Math.round(this.state.quantityCursors * this.state.cursorsBasicProduction * 100) / 100 + Math.round(this.state.quantityCrazyCatLady * this.state.crazyCatLadyBasicProduction * 100) / 100;
 
             return _react2.default.createElement(
                 'div',
@@ -22720,7 +22718,7 @@ exports = module.exports = __webpack_require__(186)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background-color: grey;\n  margin: 0;\n  font-family: 'Indie Flower', cursive; }\n\n#app {\n  height: 100%;\n  width: 100%;\n  margin: 0; }\n\n.mainFlex {\n  width: inherit;\n  height: inherit;\n  display: inline-flex;\n  justify-content: space-around; }\n  .mainFlex .main {\n    flex-grow: 10;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    .mainFlex .main .kittyButton {\n      width: 300px;\n      height: 275px;\n      background-image: url(" + __webpack_require__(187) + "); }\n  .mainFlex .rightSideBar {\n    flex-grow: 0.1;\n    display: flex;\n    flex-direction: column; }\n    .mainFlex .rightSideBar .shopButton {\n      background-color: #b6c2d6;\n      width: 300px;\n      height: 64px;\n      border: solid 2px black;\n      margin: 0;\n      align-self: flex-end;\n      display: inline-flex;\n      align-items: center;\n      font-size: 25px;\n      text-transform: uppercase; }\n      .mainFlex .rightSideBar .shopButton .quantity {\n        margin: 0 0 0 10px;\n        flex-grow: 0.5; }\n      .mainFlex .rightSideBar .shopButton .name {\n        margin: 0 0 0 10px;\n        text-align: center;\n        flex-grow: 2; }\n      .mainFlex .rightSideBar .shopButton .cost {\n        margin: 0 10px 0 10px;\n        flex-grow: 0.5; }\n", ""]);
+exports.push([module.i, "body {\n  background-color: grey;\n  margin: 0;\n  font-family: 'Indie Flower', cursive; }\n\n#app {\n  height: 100%;\n  width: 100%;\n  margin: 0; }\n\n.mainFlex {\n  width: inherit;\n  height: inherit;\n  display: inline-flex;\n  justify-content: space-around; }\n  .mainFlex .main {\n    flex-grow: 10;\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n    .mainFlex .main .kittyButton {\n      width: 300px;\n      height: 275px;\n      background-image: url(" + __webpack_require__(187) + ");\n      background-position: center; }\n      .mainFlex .main .kittyButton:active {\n        background-size: 260px 235px; }\n  .mainFlex .rightSideBar {\n    flex-grow: 0.1;\n    display: flex;\n    flex-direction: column; }\n    .mainFlex .rightSideBar .shopButton {\n      background-color: #b6c2d6;\n      width: 300px;\n      height: 64px;\n      border: solid 2px black;\n      margin: 0;\n      align-self: flex-end;\n      display: inline-flex;\n      align-items: center;\n      font-size: 25px;\n      text-transform: uppercase; }\n      .mainFlex .rightSideBar .shopButton .quantity {\n        margin: 0 0 0 10px;\n        flex-grow: 0.5; }\n      .mainFlex .rightSideBar .shopButton .name {\n        margin: 0 0 0 10px;\n        text-align: center;\n        flex-grow: 2; }\n      .mainFlex .rightSideBar .shopButton .cost {\n        margin: 0 10px 0 10px;\n        flex-grow: 0.5; }\n", ""]);
 
 // exports
 

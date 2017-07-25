@@ -26,6 +26,11 @@ body {
             width: 300px;
             height: 275px;
             background-image: url("../img/kittyButton.png");
+            background-position: center; 
+
+            &:active {
+                background-size: 260px 235px;
+            }
         }
     }
 
