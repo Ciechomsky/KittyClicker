@@ -17,9 +17,9 @@ class ShopButton extends React.Component {
 
     render() {      
         return <div className = "shopButton" onClick = {this.onClickHandler}>
-                <p> {this.props.quantity} </p>
-                <p> {this.props.name} </p>
-                <p> {this.props.cost} </p>
+                <p className = "quantity"> {this.props.quantity} </p>
+                <p className = "name"> <strong> {this.props.itemName} </strong> </p>
+                <p className = "cost"> {this.props.cost} </p>
             </div>
     }
 }
@@ -42,10 +42,12 @@ class RightSideBar extends React.Component {
         return <div className = 'rightSideBar'>
             <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost + this.state.cursorModifier * this.props.quantityCursors} 
                                          quantity = {this.props.quantityCursors}
-                                         eventOnClick = {this.props.eventOnClick} />
+                                         eventOnClick = {this.props.eventOnClick} 
+                                         itemName = 'Cursors' />
             <ShopButton name = 'CrazyCatLady' cost = {this.state.CrazyCatLadyBasicCost + this.state.CrazyCatLadyModifier * this.props.quantityCrazyCatLady} 
                                               quantity = {this.props.quantityCrazyCatLady}
-                                              eventOnClick = {this.props.eventOnClick} />
+                                              eventOnClick = {this.props.eventOnClick} 
+                                              itemName = 'Crazy Cat Lady' />
             </div>
     }
 }

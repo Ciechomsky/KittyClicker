@@ -1,6 +1,7 @@
 body {
     background-color: red;
     margin: 0;
+    font-family: 'Indie Flower', cursive;
 }
 
 #app {
@@ -40,11 +41,26 @@ body {
             border: solid 2px black;
             margin: 0;
             align-self: flex-end;
+            display: inline-flex;
+            align-items: center;
+            font-size: 25px;
+            text-transform: uppercase;
 
-            p {
-                display: inline-flex;
-                margin: 10px;
-            }
+                .quantity {
+                    margin: 0 0 0 10px;
+                    flex-grow: 0.5;
+                }
+
+                .name {
+                    margin: 0 0 0 10px;
+                    text-align: center;
+                    flex-grow: 2;                    
+                }
+
+                .cost {
+                    margin: 0 10px 0 10px;
+                    flex-grow: 0.5;
+                }
         }
     } 
 }
