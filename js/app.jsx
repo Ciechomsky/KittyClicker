@@ -88,7 +88,7 @@ class KittyButton extends React.Component {
         }
     }
 
-    render() {
+    render() { console.log(this.props.clickList);
         return <div className = 'kittyButton' onClick = {this.onClickHandler}>
                     {this.props.clickList}
                 </div>
@@ -163,8 +163,8 @@ class App extends React.Component {
     componentDidMount(){
         this.intervalId = setInterval(() => {
             const clickList = this.state.clickList.slice();
-            //clickList.shift();
-            delete clickList[0];
+            clickList.shift();
+            //delete clickList[0];
 
             this.setState({
                 currentQuantityKitties: this.state.currentQuantityKitties + 
