@@ -125,17 +125,19 @@ class App extends React.Component {
             cursorsBasicProduction: 0.1,
             quantityCrazyCatLady: 0,
             crazyCatLadyBasicProduction: 0.5,
-            clickList: []
+            clickList: [],
+            key: 0
         }
     }
 
     addKitty = () => {
         const clickList = this.state.clickList.slice();
-        clickList.push(<ShowNumber key={clickList.length + this.state.currentQuantityKitties} />)
+        clickList.push(<ShowNumber key={clickList.length + this.state.key} />)
 
         this.setState({
             currentQuantityKitties: this.state.currentQuantityKitties + 1,
-            clickList: clickList
+            clickList: clickList,
+            key: this.state.key + 1
         })
     }
 
