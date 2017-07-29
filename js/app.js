@@ -10037,7 +10037,7 @@ var App = function (_React$Component8) {
 
         _this8.addKitty = function () {
             var clickList = _this8.state.clickList.slice();
-            clickList.push(_react2.default.createElement(ShowNumber, { key: clickList.length + _this8.state.key }));
+            clickList.push(_react2.default.createElement(ShowNumber, { key: _this8.state.key }));
 
             _this8.setState({
                 currentQuantityKitties: _this8.state.currentQuantityKitties + 1,

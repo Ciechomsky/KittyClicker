@@ -132,7 +132,7 @@ class App extends React.Component {
 
     addKitty = () => {
         const clickList = this.state.clickList.slice();
-        clickList.push(<ShowNumber key={clickList.length + this.state.key} />)
+        clickList.push(<ShowNumber key={this.state.key} />)
 
         this.setState({
             currentQuantityKitties: this.state.currentQuantityKitties + 1,
