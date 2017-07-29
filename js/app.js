@@ -9956,7 +9956,6 @@ var KittyButton = function (_React$Component5) {
     _createClass(KittyButton, [{
         key: 'render',
         value: function render() {
-            console.log(this.props.clickList);
             return _react2.default.createElement(
                 'div',
                 { className: 'kittyButton', onClick: this.onClickHandler },
@@ -10088,7 +10087,6 @@ var App = function (_React$Component8) {
             this.intervalId = setInterval(function () {
                 var clickList = _this9.state.clickList.slice();
                 clickList.shift();
-                //delete clickList[0];
 
                 _this9.setState({
                     currentQuantityKitties: _this9.state.currentQuantityKitties + (_this9.state.quantityCursors * _this9.state.cursorsBasicProduction + _this9.state.quantityCrazyCatLady * _this9.state.crazyCatLadyBasicProduction),
