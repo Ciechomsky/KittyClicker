@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactCursorPosition from 'react-cursor-position';
 
 require('../scss/main.scss')
 
@@ -71,8 +72,13 @@ class ShowNumber extends React.Component {
     }
 
     render () {
+        let styles = {
+            marginTop: this.props.position.y + 'px',
+            marginLeft: this.props.position.x + 'px'
+        }
+
         if (this.state.show === "show") {
-          return <div className = "kittyNumber blockPointer"> 
+          return <div className = "kittyNumber blockPointer" style = {styles}> 
                 <p>  + 1 kitty </p>
             </div>
         } else {
@@ -82,16 +88,30 @@ class ShowNumber extends React.Component {
 }
 
 class KittyButton extends React.Component {
-    onClickHandler = () => {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            position: {
+                x: 0,
+                y: 0
+            }
+        }
+    }
+
+    onClickHandler = (event) => {
         if (typeof this.props.eventOnClick === 'function') {
-            this.props.eventOnClick();
+            this.props.eventOnClick(this.state.position);
         }
     }
 
     render() { 
-        return <div className = 'kittyButton' onClick = {this.onClickHandler}>
-                    {this.props.clickList}
-                </div>
+        return <ReactCursorPosition {...{
+                        onPositionChanged: props => this.setState(props)}} >
+                    <div className = 'kittyButton' onClick = {this.onClickHandler}>
+                        {this.props.clickList}
+                    </div>
+                </ReactCursorPosition>
     }
 }
 
@@ -130,9 +150,9 @@ class App extends React.Component {
         }
     }
 
-    addKitty = () => {
+    addKitty = (position) => {
         const clickList = this.state.clickList.slice();
-        clickList.push(<ShowNumber key={this.state.key} />)
+        clickList.push(<ShowNumber key={this.state.key} position = {position} />)
 
         this.setState({
             currentQuantityKitties: this.state.currentQuantityKitties + 1,
@@ -174,14 +194,6 @@ class App extends React.Component {
                 clickList: clickList
             });
         }, 1000);
-       
-        // this.intervalId = setInterval(() => {
-
-
-        //     this.setState({
-        //         clickList: []
-        //     });
-        // }, 2000);
     }
 
     render() {

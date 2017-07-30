@@ -1,10 +1,7 @@
-@keyframes movingNumber {
-    from {margin-top: 0}
-    to {margin-top: -80px}
-}
 @keyframes hidingElement {
     from {opacity: 1}
-    to {opacity: 0}
+    to {opacity: 0; 
+        transform: translateY(-100px)}
 }
 
 body {
@@ -42,6 +39,7 @@ body {
             height: 275px;
             background-image: url("../img/kittyButton.png");
             background-position: center; 
+            cursor: pointer;
 
             &:active {
                 background-size: 260px 235px;
@@ -52,9 +50,9 @@ body {
                 color: white;
                 font-weight: bold;
                 position: absolute;
-                margin: 0 0 0 160px; 
-                animation: movingNumber 2s,
-                                hidingElement 2s forwards;
+                animation: hidingElement 2s forwards;
+                //transition: margin 2s;
+                //transform: translateY(-80px);
 
                 p {
                     margin: 0;
@@ -79,6 +77,7 @@ body {
             align-items: center;
             font-size: 25px;
             text-transform: uppercase;
+            cursor: pointer;
 
                 .quantity {
                     margin: 0 0 0 10px;
