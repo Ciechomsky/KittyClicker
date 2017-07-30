@@ -9857,11 +9857,11 @@ var RightSideBar = function (_React$Component2) {
                 { className: 'rightSideBar' },
                 _react2.default.createElement(ShopButton, { name: 'Cursors', cost: this.state.cursorBasicCost + this.state.cursorModifier * this.props.quantityCursors,
                     quantity: this.props.quantityCursors,
-                    eventOnClick: this.props.eventOnClick,
+                    eventOnClick: this.props.buyItem,
                     itemName: 'Cursors' }),
                 _react2.default.createElement(ShopButton, { name: 'CrazyCatLady', cost: this.state.CrazyCatLadyBasicCost + this.state.CrazyCatLadyModifier * this.props.quantityCrazyCatLady,
                     quantity: this.props.quantityCrazyCatLady,
-                    eventOnClick: this.props.eventOnClick,
+                    eventOnClick: this.props.buyItem,
                     itemName: 'Crazy Cat Lady' })
             );
         }
@@ -9950,8 +9950,8 @@ var KittyButton = function (_React$Component5) {
         var _this5 = _possibleConstructorReturn(this, (KittyButton.__proto__ || Object.getPrototypeOf(KittyButton)).call(this, props));
 
         _this5.onClickHandler = function (event) {
-            if (typeof _this5.props.eventOnClick === 'function') {
-                _this5.props.eventOnClick(_this5.state.position);
+            if (typeof _this5.props.addKitty === 'function') {
+                _this5.props.addKitty(_this5.state.position);
             }
         };
 
@@ -10035,7 +10035,7 @@ var Main = function (_React$Component7) {
                     this.props.kittyPerSecond,
                     ' '
                 ),
-                _react2.default.createElement(KittyButton, { eventOnClick: this.props.eventOnClick,
+                _react2.default.createElement(KittyButton, { addKitty: this.props.addKitty,
                     clickList: this.props.clickList })
             );
         }
@@ -10126,11 +10126,11 @@ var App = function (_React$Component8) {
                 { className: 'mainFlex' },
                 _react2.default.createElement(Main, { kittyPerSecond: kittyPerSecond,
                     currentQuantityKitties: Math.round(this.state.currentQuantityKitties * 100) / 100,
-                    eventOnClick: this.addKitty,
+                    addKitty: this.addKitty,
                     clickList: this.state.clickList }),
                 _react2.default.createElement(RightSideBar, { quantityCursors: this.state.quantityCursors,
                     quantityCrazyCatLady: this.state.quantityCrazyCatLady,
-                    eventOnClick: this.buyItem })
+                    buyItem: this.buyItem })
             );
         }
     }]);

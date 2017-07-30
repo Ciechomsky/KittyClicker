@@ -41,11 +41,11 @@ class RightSideBar extends React.Component {
         return <div className = 'rightSideBar'>
             <ShopButton name = 'Cursors' cost = {this.state.cursorBasicCost + this.state.cursorModifier * this.props.quantityCursors} 
                                          quantity = {this.props.quantityCursors}
-                                         eventOnClick = {this.props.eventOnClick} 
+                                         eventOnClick = {this.props.buyItem} 
                                          itemName = 'Cursors' />
             <ShopButton name = 'CrazyCatLady' cost = {this.state.CrazyCatLadyBasicCost + this.state.CrazyCatLadyModifier * this.props.quantityCrazyCatLady} 
                                               quantity = {this.props.quantityCrazyCatLady}
-                                              eventOnClick = {this.props.eventOnClick} 
+                                              eventOnClick = {this.props.buyItem} 
                                               itemName = 'Crazy Cat Lady' />
             </div>
     }
@@ -100,8 +100,8 @@ class KittyButton extends React.Component {
     }
 
     onClickHandler = (event) => {
-        if (typeof this.props.eventOnClick === 'function') {
-            this.props.eventOnClick(this.state.position);
+        if (typeof this.props.addKitty === 'function') {
+            this.props.addKitty(this.state.position);
         }
     }
 
@@ -126,7 +126,7 @@ class Main extends React.Component {
         return <div className = 'main'>
                 <CounterOfKitties currentQuantityKitties = {this.props.currentQuantityKitties} kitties />
                 <h2 className = "blockPointer"> per second: {this.props.kittyPerSecond} </h2>
-                <KittyButton eventOnClick = {this.props.eventOnClick}
+                <KittyButton addKitty = {this.props.addKitty}
                             clickList = {this.props.clickList} />
                </div>
     }
@@ -203,11 +203,11 @@ class App extends React.Component {
         return <div className = 'mainFlex'>
                 <Main kittyPerSecond = {kittyPerSecond}
                             currentQuantityKitties = {Math.round(this.state.currentQuantityKitties* 100) / 100} 
-                            eventOnClick = {this.addKitty} 
+                            addKitty = {this.addKitty} 
                             clickList = {this.state.clickList} />
                 <RightSideBar quantityCursors = {this.state.quantityCursors} 
                               quantityCrazyCatLady = {this.state.quantityCrazyCatLady} 
-                              eventOnClick = {this.buyItem} />
+                              buyItem = {this.buyItem} />
                </div>
     }
 }
