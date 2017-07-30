@@ -55,9 +55,10 @@ class RightSideBar extends React.Component {
 //TODO: Adding cursors
 class Cursor extends React.Component {
     render  () {
-        return <li>
-                    <img src = "./img/Cursor.png" width = "50px" height = "50px"/>
-                </li>
+        let id = "cursor" + this.props.id
+
+        return <div className = "cursor" id = {id}>
+                </div>
     }
 }
 
@@ -105,11 +106,27 @@ class KittyButton extends React.Component {
         }
     }
 
+    makeCursor = (quantity) => {
+        let table = []
+
+        for (let i = 0; i < quantity ;i++) {
+            //console.log(i);
+            table.push(<Cursor id = {i} />)
+        }
+
+        return table;
+    }
+
     render() { 
+        let cursors = this.makeCursor(this.props.quantityCursors);
+
+        //console.log(this.props.quantityCursors);
+
         return <ReactCursorPosition {...{
                         onPositionChanged: props => this.setState(props)}} >
                     <div className = 'kittyButton' onClick = {this.onClickHandler}>
                         {this.props.clickList}
+                        {cursors}
                     </div>
                 </ReactCursorPosition>
     }
@@ -127,7 +144,8 @@ class Main extends React.Component {
                 <CounterOfKitties currentQuantityKitties = {this.props.currentQuantityKitties} kitties />
                 <h2 className = "blockPointer"> per second: {this.props.kittyPerSecond} </h2>
                 <KittyButton addKitty = {this.props.addKitty}
-                            clickList = {this.props.clickList} />
+                            clickList = {this.props.clickList} 
+                            quantityCursors = {this.props.quantityCursors} />
                </div>
     }
 }
@@ -141,7 +159,7 @@ class App extends React.Component {
             kittyPerSecond: 0,
             currentQuantityKitties: 0,
             globalQuantityKitties: 0,
-            quantityCursors: 0,
+            quantityCursors: 50,
             cursorsBasicProduction: 0.1,
             quantityCrazyCatLady: 0,
             crazyCatLadyBasicProduction: 0.5,
@@ -204,7 +222,8 @@ class App extends React.Component {
                 <Main kittyPerSecond = {kittyPerSecond}
                             currentQuantityKitties = {Math.round(this.state.currentQuantityKitties* 100) / 100} 
                             addKitty = {this.addKitty} 
-                            clickList = {this.state.clickList} />
+                            clickList = {this.state.clickList} 
+                            quantityCursors = {this.state.quantityCursors} />
                 <RightSideBar quantityCursors = {this.state.quantityCursors} 
                               quantityCrazyCatLady = {this.state.quantityCrazyCatLady} 
                               buyItem = {this.buyItem} />

@@ -40,6 +40,17 @@ body {
             background-image: url("../img/kittyButton.png");
             background-position: center; 
             cursor: pointer;
+            position: relative;
+
+            .cursor {
+                width: 20px;
+                height: 20px;
+                background-image: url("../img/Cursor.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                position: absolute;
+                margin: 50px 0 0 250px;
+            }
 
             &:active {
                 background-size: 260px 235px;
@@ -98,6 +109,13 @@ body {
     } 
 }
 
+
+                @for $i from 1 through 50 {
+                    #cursor#{$i} {
+                        transform: rotate($i * 10deg);
+                        transform-origin: -500% 500%;
+                    }
+                }   
 
 
 
