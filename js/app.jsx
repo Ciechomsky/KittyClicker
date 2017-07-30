@@ -110,7 +110,6 @@ class KittyButton extends React.Component {
         let table = []
 
         for (let i = 0; i < quantity ;i++) {
-            //console.log(i);
             table.push(<Cursor id = {i} />)
         }
 
@@ -159,7 +158,7 @@ class App extends React.Component {
             kittyPerSecond: 0,
             currentQuantityKitties: 0,
             globalQuantityKitties: 0,
-            quantityCursors: 50,
+            quantityCursors: 60,
             cursorsBasicProduction: 0.1,
             quantityCrazyCatLady: 0,
             crazyCatLadyBasicProduction: 0.5,

@@ -4,6 +4,27 @@
         transform: translateY(-100px)}
 }
 
+@keyframes clickingUp {
+        from { top: 0; left: 0}
+        to {top: 0; left: -10px}
+}
+
+@keyframes clickingDown {
+        from { top: 0; left: 0}
+        to {top: 0; left: -10px}
+}
+
+@keyframes clickingLeft {
+        from { top: 0; left: 0}
+        to {top: 0; left: -10px}
+}
+
+@keyframes clicking {
+        from { top: 0; left: 0}
+        to {top: 10px; left: -10px}
+}
+
+
 body {
     background-color: grey;
     margin: 0;
@@ -110,10 +131,11 @@ body {
 }
 
 
-                @for $i from 1 through 50 {
-                    #cursor#{$i} {
-                        transform: rotate($i * 10deg);
+                @for $i from 0 through 79 {
+                    #cursor#{$i} {  
+                        transform: rotate($i * 6deg);
                         transform-origin: -500% 500%;
+                        animation: clicking #{$i}s linear infinite;
                     }
                 }   
 
