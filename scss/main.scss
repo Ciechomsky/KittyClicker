@@ -54,7 +54,7 @@ body {
                 position: absolute;
                 margin: 0 0 0 160px; 
                 animation: movingNumber 2s,
-                                hidingElement 2s;
+                                hidingElement 2s forwards;
 
                 p {
                     margin: 0;
